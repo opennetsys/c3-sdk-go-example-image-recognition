@@ -17,13 +17,13 @@ $ sudo ldconfig
 This container accepts images and keeps track of how many of each type of image is has received. It has three methods:
 
 ### Process Image
-**Method Name:** "processImage"
-**Method Payload:** [bytesBuffer string, imageType (one of "png" or "jpg")]
+* **Method Name:** "processImage"
+* **Method Payload:** [bytesBuffer string, imageType (one of "png" or "jpg")]
 
 ### Get All Results
-**Method Name:** "getAllResults"
-**Method Payload:** nil
-**Returns:** A json object with a count of all of the image types received where the image type is the key and the count is the value.
+* **Method Name:** "getAllResults"
+* **Method Payload:** nil
+* **Returns:** A json object with a count of all of the image types received where the image type is the key and the count is the value.
 
 e.g.
 ```json
@@ -35,9 +35,9 @@ e.g.
 ```
 
 ### Get Results For Type
-**Method Name:** "getResultsForType"
-**Method Payload:** [type name string]
-**Returns:** the count of that type, e.g. "Arctic fox" would return "30"
+* **Method Name:** "getResultsForType"
+* **Method Payload:** [type name string]
+* **Returns:** the count of that type, e.g. "Arctic fox" would return "30"
 
 ## License
 [MIT](LICENSE)
