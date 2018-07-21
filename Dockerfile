@@ -7,6 +7,8 @@ RUN curl -L \
 
 RUN ldconfig
 
+RUN mkdir -p /tmp
+
 # Hide some warnings
 ENV TF_CPP_MIN_LOG_LEVEL 2
 
@@ -62,7 +64,7 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 # Install dependencies
-RUN go get -u golang.org/x/vgo
+# RUN go get -u golang.org/x/vgo
 
 # Download InceptionV3 model
 RUN mkdir -p /model && \
@@ -75,7 +77,7 @@ WORKDIR "/go/src/github.com/c3systems/example-go-image-recognition"
 COPY . .
 
 # Install the app
-RUN vgo build -o /usr/bin/app .
+# RUN vgo build -o /usr/bin/app .
 
 # Run the app
-CMD [ "app" ]
+CMD [ "./app" ]
