@@ -23,24 +23,30 @@ type jsonResults map[string]uint64
 type App struct {
 }
 
-func (a *App) setItem(key, value string) error {
-	client.State().Set(key, value)
+func (a *App) setItem(key string, value []byte) error {
+	client.State().Set([]byte(key), value)
 	return nil
 }
 
-func (a *App) getItem(key string) string {
-	return client.State().Get(key)
+func (a *App) getItem(key string) ([]byte, bool) {
+	return client.State().Get([]byte(key))
 }
 
 func (a *App) getAllResults() string {
-	return client.State().Get(dataKey)
+	v, found := client.State().Get([]byte(dataKey))
+	if !found {
+		return "{}"
+	}
+	return string(v)
 }
 
 func (a *App) getResultsForType(t string) (string, error) {
 	var data jsonResults
-	dataStr := a.getItem(dataKey)
-	if err := json.Unmarshal([]byte(dataStr), &data); err != nil {
-		return "", err
+	dataBytes, found := a.getItem(dataKey)
+	if found {
+		if err := json.Unmarshal(dataBytes, &data); err != nil {
+			return "", err
+		}
 	}
 	if data == nil {
 		data = make(jsonResults)
@@ -73,29 +79,31 @@ func (a *App) processImage(imageHex, format string) (string, error) {
 	}
 
 	var data jsonResults
-	dataStr := a.getItem(dataKey)
-	if err := json.Unmarshal([]byte(dataStr), &data); err != nil {
-		log.Printf("error unmarshalling; %v", err)
-		return "", err
+	dataBytes, found := a.getItem(dataKey)
+	if found {
+		if err := json.Unmarshal(dataBytes, &data); err != nil {
+			log.Printf("error unmarshalling; %v", err)
+			return "", err
+		}
 	}
 	if data == nil {
 		data = make(jsonResults)
 	}
 
 	data[resultType]++
-	dataBytes, err := json.Marshal(data)
+	dataBytes, err = json.Marshal(data)
 	if err != nil {
 		log.Printf("error marshalling; %v", err)
 		return "", err
 	}
-	dataStr = string(dataBytes)
 
-	if err = a.setItem(dataKey, dataStr); err != nil {
+	if err = a.setItem(dataKey, dataBytes); err != nil {
 		log.Printf("error setting item; %v", err)
 		return "", err
 	}
 
-	log.Println("process image done")
+	log.Printf("processing image done; result type; %s", resultType)
+
 	return resultType, nil
 }
 
