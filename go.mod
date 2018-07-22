@@ -2,6 +2,7 @@ module github.com/c3systems/example-go-image-recognition
 
 require (
 	github.com/c3systems/c3 v0.0.0-20180720170959-ea021300c3d3
+	github.com/c3systems/go-c3-sdk v0.0.4
 	github.com/c3systems/sdk-go v0.0.4
 	github.com/davecgh/go-spew v1.1.0
 	github.com/fsnotify/fsnotify v1.4.7

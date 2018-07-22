@@ -1,4 +1,6 @@
-# C3 Image Recognition Example in Golang
+# C3 Image Recoginition Example
+
+> An image recognition example in Go that runs on [C3](https://github.com/c3systems/c3)
 
 ## About
 This library was forked from [tinrab/go-tensorflow-image-recognition](https://github.com/tinrab/go-tensorflow-image-recognition)

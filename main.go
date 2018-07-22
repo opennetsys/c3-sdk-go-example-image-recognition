@@ -1,11 +1,12 @@
 package main
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"log"
 	"strconv"
 
-	c3 "github.com/c3systems/sdk-go"
+	c3 "github.com/c3systems/go-c3-sdk"
 )
 
 const (
@@ -48,11 +49,17 @@ func (a *App) getResultsForType(t string) (string, error) {
 	return strconv.FormatUint(data[t], 10), nil
 }
 
-func (a *App) processImage(image, format string) (string, error) {
+func (a *App) processImage(imageHex, format string) (string, error) {
+	log.Println("process image called")
 	var resultType = ""
-
-	results, err := recognizeHandler(image, format)
+	imageBytes, err := hex.DecodeString(imageHex)
 	if err != nil {
+		log.Printf("error decoding; %v", err)
+		return "", err
+	}
+	results, err := recognizeHandler(imageBytes, format)
+	if err != nil {
+		log.Printf("error with recognize handler; %v", err)
 		return "", err
 	}
 	if results == nil || len(results) == 0 {
@@ -68,6 +75,7 @@ func (a *App) processImage(image, format string) (string, error) {
 	var data jsonResults
 	dataStr := a.getItem(dataKey)
 	if err := json.Unmarshal([]byte(dataStr), &data); err != nil {
+		log.Printf("error unmarshalling; %v", err)
 		return "", err
 	}
 	if data == nil {
@@ -77,14 +85,17 @@ func (a *App) processImage(image, format string) (string, error) {
 	data[resultType]++
 	dataBytes, err := json.Marshal(data)
 	if err != nil {
+		log.Printf("error marshalling; %v", err)
 		return "", err
 	}
 	dataStr = string(dataBytes)
 
 	if err = a.setItem(dataKey, dataStr); err != nil {
+		log.Printf("error setting item; %v", err)
 		return "", err
 	}
 
+	log.Println("process image done")
 	return resultType, nil
 }
 

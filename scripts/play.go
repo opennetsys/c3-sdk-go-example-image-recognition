@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"io/ioutil"
 	"log"
 	"os"
@@ -32,7 +33,7 @@ func main() {
 	newState, err := sb.Play(&sandbox.PlayConfig{
 		ImageID:      imageID,
 		InitialState: []byte(initialState),
-		Payload:      []byte(`["processImage", "` + string(fileBytes) + `", "` + fileExtension + `"]`),
+		Payload:      []byte(`["processImage", "` + hex.EncodeToString(fileBytes) + `", "` + fileExtension + `"]`),
 	})
 	if err != nil {
 		log.Fatalf("err playing in sandbox\n%v", err)

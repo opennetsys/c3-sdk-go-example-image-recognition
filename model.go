@@ -31,7 +31,7 @@ var (
 
 func loadModel() error {
 	// Load inception model
-	model, err := ioutil.ReadFile("/model/tensorflow_inception_graph.pb")
+	model, err := ioutil.ReadFile("model/tensorflow_inception_graph.pb")
 	if err != nil {
 		return err
 	}
@@ -47,7 +47,7 @@ func loadModel() error {
 	}
 
 	// Load labels
-	labelsFile, err := os.Open("/model/imagenet_comp_graph_label_strings.txt")
+	labelsFile, err := os.Open("model/imagenet_comp_graph_label_strings.txt")
 	if err != nil {
 		return err
 	}
@@ -63,8 +63,8 @@ func loadModel() error {
 	return err
 }
 
-func recognizeHandler(image, imageFormat string) ([]LabelResult, error) {
-	imageBuffer := bytes.NewBufferString(image)
+func recognizeHandler(image []byte, imageFormat string) ([]LabelResult, error) {
+	imageBuffer := bytes.NewBuffer(image)
 
 	// Make tensor
 	tensor, err := makeTensorFromImage(imageBuffer, imageFormat)
