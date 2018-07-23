@@ -27,7 +27,7 @@
 
 [[constraint]]
   branch = "develop"
-  name = "github.com/c3systems/c3"
+  name = "github.com/c3systems/c3-go"
 
 [[constraint]]
   name = "github.com/sirupsen/logrus"

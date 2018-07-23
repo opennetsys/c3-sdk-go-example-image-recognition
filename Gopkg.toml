@@ -27,11 +27,7 @@
 
 [[constraint]]
   branch = "develop"
-  name = "github.com/c3systems/c3"
-
-[[constraint]]
-  branch = "develop"
-  name = "github.com/c3systems/go-c3-sdk"
+  name = "github.com/c3systems/c3-sdk-go"
 
 [[constraint]]
   name = "github.com/tensorflow/tensorflow"
