@@ -289,7 +289,6 @@ func (s *Service) sendMessage(msg []byte, port string) error {
 	conn.Write(msg)
 	conn.Write([]byte("\n"))
 	log.Printf("[sandbox] wrote to %s", host)
-	time.Sleep(5 * time.Second)
 	return nil
 }
 
