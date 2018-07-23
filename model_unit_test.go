@@ -1,4 +1,4 @@
-// +built unit
+// +build unit
 
 package main
 
