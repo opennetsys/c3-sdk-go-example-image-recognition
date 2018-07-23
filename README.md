@@ -6,17 +6,17 @@
 This library was forked from [tinrab/go-tensorflow-image-recognition](https://github.com/tinrab/go-tensorflow-image-recognition)
 
 ## Installation
-If you don't want to run the docker file, you'll first need to install tensorflow:
-```bash
-$ sudo curl -L \
-   "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-1.3.0.tar.gz" | \
-   tar -C "/usr/local" -xz
-
-$ sudo ldconfig
-```
+If you don't want to run the docker file, you'll first need to [install tensorflow](https://www.tensorflow.org/install/install_go).
 
 ## Usage
-This container accepts images and keeps track of how many of each type of image is has received. It has three methods:
+This container accepts images and keeps track of how many of each type of image is has received. To run:
+
+```bash
+$ make build/docker
+$ make run/sandbox IMAGEID=<docker_image_id> 
+```
+
+The "smart container" has three methods:
 
 ### Process Image
 * **Method Name:** "processImage"
