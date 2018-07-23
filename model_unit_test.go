@@ -106,7 +106,7 @@ func TestRecognizeHandler(t *testing.T) {
 			continue
 		}
 
-		result, err := recognizeHandler(string(fileBytes), "jpg")
+		result, err := recognizeHandler(fileBytes, "jpg")
 		if err != tt.err {
 			t.Errorf("test %d failed\nexpected err %v\nreceived err %v", idx+1, tt.err, err)
 			continue
