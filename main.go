@@ -6,7 +6,7 @@ import (
 	"log"
 	"strconv"
 
-	c3 "github.com/c3systems/c3-go-sdk"
+	c3 "github.com/c3systems/c3-sdk-go"
 )
 
 const (

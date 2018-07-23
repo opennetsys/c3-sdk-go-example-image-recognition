@@ -21,18 +21,23 @@
   branch = "master"
   name = "github.com/btcsuite/btcd"
   packages = ["btcec"]
-  revision = "f673a4b563b57b9a95832545c878669a7fa801d9"
+  revision = "9a2f9524024889e129a5422aca2cff73cb3eabf6"
 
 [[projects]]
   branch = "develop"
   name = "github.com/c3systems/c3"
+  packages = ["core/sandbox"]
+  revision = "b81f41d76802337f5c4677c883b4240cfb388228"
+
+[[projects]]
+  branch = "develop"
+  name = "github.com/c3systems/c3-go"
   packages = [
     "common/netutil",
     "common/stringutil",
     "config",
     "core/docker",
     "core/ipfs",
-    "core/sandbox",
     "core/server",
     "log/color",
     "log/hooks",
@@ -40,13 +45,13 @@
     "registry/server",
     "registry/util"
   ]
-  revision = "3f05fe9329f98e7e32b5ad63b40b8041b10be937"
+  revision = "b81f41d76802337f5c4677c883b4240cfb388228"
 
 [[projects]]
   branch = "develop"
-  name = "github.com/c3systems/c3-go-sdk"
+  name = "github.com/c3systems/c3-sdk-go"
   packages = ["."]
-  revision = "b357252f880974e358b551c595a5ad7d557173e1"
+  revision = "e03d94892e887cc2162921efa37c1c0f6e8d19b3"
 
 [[projects]]
   name = "github.com/docker/distribution"
@@ -275,7 +280,7 @@
     "sha3",
     "ssh/terminal"
   ]
-  revision = "a2144134853fc9a27a7b1e3eb4f19f1a76df13c9"
+  revision = "c126467f60eb25f8f27e5a981f32a87e3965053f"
 
 [[projects]]
   branch = "master"
@@ -301,6 +306,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "5b49a4d36ac6d7292e4ec847ffd5c27fc18555b977684d27dc020221656f6508"
+  inputs-digest = "68c64b6c24d94d28425fa716f7d40b82f96fc809a23df9b1c234d0f0136f0a62"
   solver-name = "gps-cdcl"
   solver-version = 1

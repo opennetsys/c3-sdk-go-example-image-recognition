@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	loghooks "github.com/c3systems/c3/log/hooks"
+	loghooks "github.com/c3systems/c3-go/log/hooks"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/docker/docker/api/types"
@@ -239,7 +239,6 @@ func (s *Client) RunContainer(imageID string, cmd []string, config *RunContainer
 	if len(config.Volumes) > 0 {
 		for k, v := range config.Volumes {
 			dockerConfig.Volumes[k] = struct{}{}
-
 			hostConfig.Mounts = append(hostConfig.Mounts, mount.Mount{
 				Type:     "bind",
 				Source:   v,

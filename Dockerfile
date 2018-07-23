@@ -74,7 +74,7 @@ RUN go get github.com/tensorflow/tensorflow/tensorflow/go
 # Set up project directory
 WORKDIR "/go/src/github.com/c3systems/c3-go-example-image-recognition"
 COPY . .
-RUN rm -rf /go/src/github.com/c3systems/example-go-image-recognition/vendor/github.com/tensorflow
+RUN rm -rf /go/src/github.com/c3systems/c3-go-example-image-recognition/vendor/github.com/tensorflow
 
 # Install the app
 RUN make build
