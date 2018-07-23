@@ -1,3 +1,5 @@
+[![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
+
 # C3 Image Recoginition Example
 
 > An image recognition example in Go that runs on [C3](https://github.com/c3systems/c3)

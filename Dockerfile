@@ -67,12 +67,12 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 RUN mkdir -p /model && \
   wget "https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip" -O /model/inception.zip && \
   unzip /model/inception.zip -d /model && \
-  chmod -R 777 /model && mkdir -p /go/src/github.com/c3systems/example-go-image-recognition/model && mv /model /go/src/github.com/c3systems/example-go-image-recognition/model
+  chmod -R 777 /model && mkdir -p /go/src/github.com/c3systems/c3-go-example-image-recognition/model && mv /model /go/src/github.com/c3systems/c3-go-example-image-recognition/model
 
 RUN go get github.com/tensorflow/tensorflow/tensorflow/go
 
 # Set up project directory
-WORKDIR "/go/src/github.com/c3systems/example-go-image-recognition"
+WORKDIR "/go/src/github.com/c3systems/c3-go-example-image-recognition"
 COPY . .
 RUN rm -rf /go/src/github.com/c3systems/example-go-image-recognition/vendor/github.com/tensorflow
 

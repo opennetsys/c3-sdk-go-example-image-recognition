@@ -44,9 +44,9 @@
 
 [[projects]]
   branch = "develop"
-  name = "github.com/c3systems/go-c3-sdk"
+  name = "github.com/c3systems/c3-go-sdk"
   packages = ["."]
-  revision = "b6baf82cc571e4768fbaf9f1ce42ff13aa1adf5d"
+  revision = "b357252f880974e358b551c595a5ad7d557173e1"
 
 [[projects]]
   name = "github.com/docker/distribution"
@@ -301,6 +301,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "da10ae47ef5978ebfe76535b3d36def9681aee6acddb465845166e26bde5df9f"
+  inputs-digest = "5b49a4d36ac6d7292e4ec847ffd5c27fc18555b977684d27dc020221656f6508"
   solver-name = "gps-cdcl"
   solver-version = 1
