@@ -27,14 +27,17 @@
   branch = "develop"
   name = "github.com/c3systems/c3"
   packages = ["core/sandbox"]
-  revision = "b81f41d76802337f5c4677c883b4240cfb388228"
+  revision = "6c321cd3613356ec82cf86445d56eb068baf9601"
 
 [[projects]]
   branch = "develop"
   name = "github.com/c3systems/c3-go"
   packages = [
+    "common/hashing",
+    "common/hexutil",
     "common/netutil",
     "common/stringutil",
+    "common/txparamcoder",
     "config",
     "core/docker",
     "core/ipfs",
@@ -45,13 +48,13 @@
     "registry/server",
     "registry/util"
   ]
-  revision = "b81f41d76802337f5c4677c883b4240cfb388228"
+  revision = "6c321cd3613356ec82cf86445d56eb068baf9601"
 
 [[projects]]
   branch = "develop"
   name = "github.com/c3systems/c3-sdk-go"
   packages = ["."]
-  revision = "e03d94892e887cc2162921efa37c1c0f6e8d19b3"
+  revision = "e636b9184714b63cc0becd6d918da718e05880cb"
 
 [[projects]]
   name = "github.com/docker/distribution"
@@ -306,6 +309,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "68c64b6c24d94d28425fa716f7d40b82f96fc809a23df9b1c234d0f0136f0a62"
+  inputs-digest = "37beff4f9d0df29fd45138a4716fbbdd5e6e98fa104da16785a84ef6e865cbe7"
   solver-name = "gps-cdcl"
   solver-version = 1

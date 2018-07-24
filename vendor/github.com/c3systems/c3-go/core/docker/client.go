@@ -206,17 +206,17 @@ func (s *Client) RemoveAllImages() error {
 	return nil
 }
 
-// RunContainerConfig ...
-type RunContainerConfig struct {
+// CreateContainerConfig ...
+type CreateContainerConfig struct {
 	// container:host
 	Volumes map[string]string
 	Ports   map[string]string
 }
 
-// RunContainer ...
-func (s *Client) RunContainer(imageID string, cmd []string, config *RunContainerConfig) (string, error) {
+// CreateContainer ...
+func (s *Client) CreateContainer(imageID string, cmd []string, config *CreateContainerConfig) (string, error) {
 	if config == nil {
-		config = &RunContainerConfig{}
+		config = &CreateContainerConfig{}
 	}
 
 	dockerConfig := &container.Config{
@@ -269,15 +269,22 @@ func (s *Client) RunContainer(imageID string, cmd []string, config *RunContainer
 		return "", err
 	}
 
-	err = s.client.ContainerStart(context.Background(), resp.ID, types.ContainerStartOptions{})
-
-	if err != nil {
-		return "", err
-	}
-
-	log.Printf("[docker] running container %s", resp.ID)
+	log.Printf("[docker] container %s is ready", resp.ID)
 
 	return resp.ID, nil
+}
+
+// StartContainer ...
+func (s *Client) StartContainer(containerID string) error {
+	err := s.client.ContainerStart(context.Background(), containerID, types.ContainerStartOptions{})
+
+	if err != nil {
+		log.Printf("[docker] error starting container %s; %v", containerID, err)
+		return err
+	}
+
+	log.Printf("[docker] running container %s", containerID)
+	return nil
 }
 
 // StopContainer ...
@@ -346,6 +353,7 @@ func (s *Client) LoadImage(input io.Reader) error {
 func (s *Client) LoadImageByFilepath(filepath string) error {
 	input, err := os.Open(filepath)
 	if err != nil {
+		log.Printf("[docker] load image by filepath error; %v", err)
 		return err
 	}
 	return s.LoadImage(input)
@@ -359,6 +367,31 @@ func dockerVersionFromCLI() string {
 	}
 
 	return strings.TrimSpace(string(out))
+}
+
+// CopyToContainer ...
+func (s *Client) CopyToContainer(containerID, dstpath string, data io.Reader) error {
+	err := s.client.CopyToContainer(context.Background(), containerID, dstpath, data, types.CopyToContainerOptions{
+		AllowOverwriteDirWithFile: true,
+	})
+	if err != nil {
+		log.Errorf("[docker] copy to container error; %v", err)
+		return err
+	}
+
+	return nil
+}
+
+// CopyFromContainer ...
+func (s *Client) CopyFromContainer(containerID, srcpath string) (io.ReadCloser, error) {
+	reader, pathstat, err := s.client.CopyFromContainer(context.Background(), containerID, srcpath)
+	if err != nil {
+		log.Errorf("[docker] error copying from container; %v", err)
+		return nil, err
+	}
+
+	_ = pathstat // might need this
+	return reader, nil
 }
 
 func init() {

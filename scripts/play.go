@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/hex"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 
+	"github.com/c3systems/c3-go/common/txparamcoder"
 	"github.com/c3systems/c3/core/sandbox"
 )
 
@@ -31,10 +31,16 @@ func main() {
 		log.Fatalf("err reading file\n%v", err)
 	}
 
+	payload := txparamcoder.ToJSONArray(
+		txparamcoder.EncodeMethodName("processImage"),
+		txparamcoder.EncodeParam(hex.EncodeToString(fileBytes)),
+		txparamcoder.EncodeParam(fileExtension),
+	)
+
 	newState, err := sb.Play(&sandbox.PlayConfig{
 		ImageID:      imageID,
 		InitialState: []byte(initialState),
-		Payload:      []byte(fmt.Sprintf(`[%q,%q,%q]`, "processImage", hex.EncodeToString(fileBytes), fileExtension)),
+		Payload:      payload,
 	})
 	if err != nil {
 		log.Fatalf("err playing in sandbox\n%v", err)
