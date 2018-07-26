@@ -15,7 +15,7 @@ This container accepts images and keeps track of how many of each type of image 
 
 ```bash
 $ make build/docker
-$ make run/sandbox IMAGEID=<docker_image_id> 
+$ make run/sandbox IMAGEID=<docker_image_id>
 ```
 
 The "smart container" has three methods:
@@ -42,6 +42,38 @@ e.g.
 * **Method Name:** "getResultsForType"
 * **Method Payload:** [type name string]
 * **Returns:** the count of that type, e.g. "Arctic fox" would return "30"
+
+### Demo
+
+In terminal 1
+
+```bash
+make run/node
+```
+
+In terminal 2
+
+Deploy
+
+```bash
+make test/node IMAGEID="QmPd91JZkGyb9nE11XETxY5NL9QUh7iR1aqwPYgaNq
+so7J" PEERID="/ip4/127.0.0.1/tcp/9005/ipfs/QmSHxagveKLvxU2TMEPRwY5fRzrMU
+hfjrXvqWFbPrAwdyr" METHOD="deploy"
+```
+
+Invoke Method
+
+```bash
+make test/node IMAGEID="QmPd91JZkGyb9nE11XETxY5NL9QUh7iR1aqwPYgaNq
+so7J" PEERID="/ip4/127.0.0.1/tcp/9005/ipfs/QmSHxagveKLvxU2TMEPRwY5fRzrMU
+hfjrXvqWFbPrAwdyr" METHOD="invokeMethod"
+```
+
+Replace `IMAGEID` and `PEERID` with your own values.
+
+You get `IMAGEID` from `c3 deploy <docker_image_id>`
+
+You get `PEERID` from `make run/node`
 
 ## License
 [MIT](LICENSE)
